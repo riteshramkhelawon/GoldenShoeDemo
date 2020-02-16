@@ -31,7 +31,7 @@
                     <img height="auto" width="60%" src="/assets/shoes/beige-shoes.jpg" class="img-fluid rounded mx-auto d-block" alt="Responsive image" />
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Beige shoes</h5>
-                        <p>New line of beige coloured shoes</p>
+                        <p>New amazing line of beige coloured shoes</p>
                     </div>
                 </div>
                 <div class="carousel-item">
