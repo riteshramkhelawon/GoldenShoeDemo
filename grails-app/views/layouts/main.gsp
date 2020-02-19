@@ -33,7 +33,7 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light mb-0">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -66,9 +66,9 @@
             <p><b>&copy;</b> Copyright Golden Shoe 2020</p>
         </div>
         <div class="col-md-6">
-            <i class="fab fa-facebook-f fa-2x"></i>
-            <i class="fab fa-twitter fa-2x ml-5"></i>
-            <i class="fab fa-instagram fa-2x ml-5"></i>
+            <a class="text-light" href="#"><i class="fab fa-facebook-f fa-2x"></i></a>
+            <a class="text-light" href="#"><i class="fab fa-twitter fa-2x ml-5"></i></a>
+            <a class="text-light" href="#"><i class="fab fa-instagram fa-2x ml-5"></i></a>
         </div>
     </div>
 </div>
@@ -79,6 +79,10 @@
 </div>
 
 <asset:javascript src="application.js"/>
-
+<style>
+    a.text-light:hover, a.text-light:focus {
+    color: yellow !important;
+}
+</style>
 </body>
 </html>
