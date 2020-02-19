@@ -12,35 +12,35 @@ class BootStrap {
                 colour : "grey",
                 availableSizes : [8, 9, 10],
                 type : "stylish",
-                mainImgUrl : "YEEZYmainImgUrl",
-                secondImgUrl : "YEEZYsecondImgUrl",
-                thirdImgUrl : "YEEZYthirdImgUrl"
+                mainImgUrl : "/assets/shoes/yeezy-main.jpg",
+                secondImgUrl : "/assets/shoes/yeezy-second.jpg",
+                thirdImgUrl : "/assets/shoes/yeezy-third.jpg"
         ).save()
 
         def heels = new Product(
                 productName : "Heel Shoes",
                 price : 44.99,
-                description : "High heel shoes imported directly from Italy.",
+                description : "High heel leather shoes. Manufactured by a major fashion company in Italy",
                 stock : 20 ,
                 colour : "Red",
                 availableSizes : [5, 7, 8],
                 type : "heels",
-                mainImgUrl : "HEELSmainImgUrl",
-                secondImgUrl : "HEELSsecondImgUrl",
-                thirdImgUrl : "HEELSthirdImgUrl"
+                mainImgUrl : "/assets/shoes/heels-main.jpg",
+                secondImgUrl : "/assets/shoes/heels-second.jpg",
+                thirdImgUrl : "/assets/shoes/heels-third.jpg"
         ).save()
 
         def adidas = new Product(
                 productName : "Adidas Classics",
                 price : 70.00,
-                description : "New Adidas classic black running shoes frm their sports collection.",
+                description : "New Adidas classic black running shoes from their sports collection.",
                 stock : 75 ,
                 colour : "Black",
                 availableSizes : [7, 9, 11],
                 type : "trainers",
-                mainImgUrl : "TRAINERSmainImgUrl",
-                secondImgUrl : "TRAINERSsecondImgUrl",
-                thirdImgUrl : "TRAINERSthirdImgUrl"
+                mainImgUrl : "/assets/shoes/adidas-main.jpg",
+                secondImgUrl : "/assets/shoes/adidas-second.jpg",
+                thirdImgUrl : "/assets/shoes/adidas-third.jpg"
         ).save()
 
 
