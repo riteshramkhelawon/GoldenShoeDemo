@@ -43,29 +43,17 @@
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fas fa-angle-left fa-5x text-primary"></i></span>
+                <span aria-hidden="true"><i class="fas fa-angle-left fa-5x text-primary"></i></span>
                 <span class="sr-only">Previous</span>
             </a>
             <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fas fa-angle-right fa-5x text-primary"></i></span>
+                <span aria-hidden="true"><i class="fas fa-angle-right fa-5x text-primary"></i></span>
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
-
-
-
-
-
-
-
-
-        <p>
-          Find some of our latest products. Don't forget to review our products!
-        </p>
-
-
     </section>
+
+   
 </div>
 
 </body>
