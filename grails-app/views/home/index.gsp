@@ -5,88 +5,108 @@
     <title>Golden Shoe</title>
 </head>
 <body>
+    <section id="mainImagesSlider" class="text-center">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
 
-    <div id="content" role="main">
-        <section class="text-primary row m-0" style="max-width: 100%;">
-            <div class="container">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="/assets/shoes/orange.jpg" alt="Firefly Shoes" style="width:100%;">
+                </div>
 
+                <div class="item">
+                    <img src="/assets/shoes/diff-colour-shoes.jpg" alt="Different Coloured Shoes" style="width:100%;">
+                </div>
 
+                <div class="item">
+                    <img src="/assets/shoes/boots.jpg" alt="Boots" style="width:100%;">
+                </div>
             </div>
 
-            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img height="auto" width="60%" src="/assets/shoes/converse.jpg" class="img-fluid rounded mx-auto d-block" alt="Responsive image" />
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Converse</h5>
-                            <p>New amazing line of Converse shoes</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img height="auto" width="60%" src="/assets/shoes/beige-shoes.jpg" class="img-fluid rounded mx-auto d-block" alt="Responsive image" />
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Beige shoes</h5>
-                            <p>New amazing line of beige coloured shoes</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img height="auto" width="60%" src="/assets/shoes/heels.jpg" class="img-fluid rounded mx-auto d-block" alt="Responsive image" />
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Heeled shoes</h5>
-                            <p>New line of high heel shoes</p>
-                        </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+
+    <section id="topProducts" class="container">
+        <h1 class="text-center text-secondary"><strong>Top Products</strong></h1>
+
+        <div class="card-group">
+            <g:each var="product" in="${products}">
+                <div class="thumbnail card m-md-3" style="border-left: 1px solid rgba(0, 0, 0, 0.125);">
+                    <img src="${product.mainImgUrl}" class="card-img-top" alt="...">
+                    <div class="text-center card-body">
+                        <h4 class="card-title"><strong>${product.productName}</strong></h4>
+                        <p class="card-text">${product.description}</p>
+                        <p class="card-text" style="color: firebrick;"><strong>£<g:formatNumber number="${product.price}" type="currency" currencySymbol=""/>
+                        </strong></p>
+                        <small>Available in ${product.colour}</small>
+                        <br>
+                        <small class="text-success"><em><strong>In Stock</strong></em></small>
+                        <br><br>
+                        <form action="/product/index" method="get">
+                            <input type="hidden" name="productName" value="${product.productName}">
+                            <button class="btn btn-info btn-block" type="submit">View</button>
+                        </form>
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                    <span aria-hidden="true"><i class="fas fa-angle-left fa-5x text-primary"></i></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                    <span aria-hidden="true"><i class="fas fa-angle-right fa-5x text-primary"></i></span>
-                    <span class="sr-only">Next</span>
-                </a>
+            </g:each>
+        </div>
+    </section>
+
+    <hr class="container">
+
+    <section id="about" class="container">
+        <h2 class="text-secondary text-center"></h2>
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <h3>Shipping</h3>
+                <br>
+                <i class="fas fa-shipping-fast fa-5x"></i>
+                <br><br>
+                <h5>Fast, reliable and dedicated shipping. Straight to your door.</h5>
             </div>
-        </section>
-
-        <section class="container">
-            <h2 class="text-center">Top Products</h2>
-
-            <div class="card-group">
-                <g:each var="product" in="${products}">
-                    <div class="card m-3" style="border-left: 1px solid rgba(0, 0, 0, 0.125);">
-                        <img src="/assets/shoes/beige-shoes.jpg" class="card-img-top" alt="...">
-                        <div class=" text-center card-body">
-                            <h4 class="card-title"><strong>${product.productName}</strong></h4>
-                            <p class="card-text">${product.description}</p>
-                            <p class="card-text" style="color: firebrick;">£<span><g:formatNumber number="${product.price}" type="currency" currencySymbol=""/></span></p>
-                            <small>Available in ${product.colour}</small>
-                            <br>
-                            <small class="<g:if test='${product.stock > 0}'>text-success</g:if><g:else>text-danger</g:else>"><em><strong>In Stock</strong></em></small>
-                            <br><br>
-                            <form action="/product/index" method="get">
-                                <input type="hidden" name="productName" value="${product.productName}">
-                                <button class="btn btn-info btn-block" type="submit">View Product</button>
-                            </form>
-                        </div>
-                    </div>
-                </g:each>
+            <div class="col-md-4 text-center">
+                <h3>Gift Wrapping</h3>
+                <br>
+                <i class="fas fa-gift fa-5x"></i>
+                <br><br>
+                <h5>Get your shoes gift wrapped personally by us. Perfect for any occasion.</h5>
             </div>
-
-
-
-        </section>
-    </div>
+            <div class="col-md-4 text-center">
+                <h3>Customer Support</h3>
+                <br>
+                <i class="fas fa-phone fa-5x"></i>
+                <br><br>
+                <h5>Customer support available whenever you need it. We will be sure to resolve any issues.</h5>
+            </div>
+        </div>
+    </section>
 
 
     <style>
         .card {
             border-left: 1px solid rgba(0, 0, 0, 0.125);
         }
+
+        .thumbnail img {
+            height:250px;
+            width:100%;
+        }
+
     </style>
 </body>
 </html>
