@@ -6,23 +6,25 @@
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#list-product" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="list-product" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-                <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:table collection="${productList}" />
+        <section class="container">
+            <h1>${product.productName}</h1>
+            <hr>
+            <h2 style="color: firebrick"><em><b>Price: £<span><g:formatNumber number="${product.price}" type="currency" currencySymbol=""/></span></b></em></h2>
+            <h3>${product.description}</h3>
+            <h3>${product.availableSizes}</h3>
 
-            <div class="pagination">
-                <g:paginate total="${productCount ?: 0}" />
-            </div>
-        </div>
+            <small>In stock: ${product.stock}</small>
+
+
+            <img src="${product.mainImgUrl}" />
+        </section>
+
+    <div>
+        <button type="button">Buy Now</button>
+    </div>
+
+
     </body>
+
+
 </html>

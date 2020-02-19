@@ -9,9 +9,12 @@ class ProductController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond productService.list(params), model:[productCount: productService.count()]
+    def index() {
+        println("name: ${params.productName}")
+        def product = Product.findByProductName(params.productName)
+
+        render(view: "index", model: [product: product])
+
     }
 
     def show(Long id) {
