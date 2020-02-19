@@ -38,7 +38,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse fixed-top" id="navbarTogglerDemo01" style="background-color: firebrick;">
-        <a class="navbar-brand" href="#">Golden Shoe</a>
+        <a class="navbar-brand" href="/">Golden Shoe</a>
         <ul class="navbar-nav navbar-right mr-5">
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
