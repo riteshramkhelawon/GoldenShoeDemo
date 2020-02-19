@@ -53,7 +53,24 @@
         </div>
     </section>
 
-   
+    <section class="container">
+        <h2 class="text-center">Top Products</h2>
+
+        <g:each var="product" in="${products}">
+            <div>
+                <p>${product.productName}</p>
+                <small>${product.description}</small>
+                <br><br>
+                <p>£<span><g:formatNumber number="${product.price}" type="currency" currencySymbol=""/></span></p>
+                <form action="/product/index" method="get">
+                    <input type="hidden" name="productName" value="${product.productName}">
+                    <button type="submit">View Product</button>
+                </form>
+            </div>
+        </g:each>
+
+    </section>
+
 </div>
 
 </body>
