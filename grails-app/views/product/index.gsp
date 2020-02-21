@@ -22,14 +22,17 @@
                     <h3>${product.availableSizes}</h3>
 
                     <div class="thumbnails row justify-content-center">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <img class="thumbnailImg" onclick="$('#largeImgDiv').attr('src','${product.mainImgUrl}');" width="100px" src="${product.mainImgUrl}" />
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <img class="thumbnailImg" onclick="$('#largeImgDiv').attr('src','${product.secondImgUrl}');" width="100px"  src="${product.secondImgUrl}" />
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <img class="thumbnailImg" onclick="$('#largeImgDiv').attr('src','${product.thirdImgUrl}');" width="100px"  src="${product.thirdImgUrl}" />
+                        </div>
+                        <div class="col-md-3">
+                            <a class="thumbnails" id="video"><i class='m-3 far fa-play-circle fa-4x'></i></a>
                         </div>
                     </div>
 
@@ -38,6 +41,9 @@
                 <div class="col-md-5">
                     <div class="container">
                         <img width="60%" id="largeImgDiv" src="${product.mainImgUrl}" />
+                        <div class="hidden" id="largeVidDiv">
+                            <iframe width="60%" height="345" src=${product.videoUrl} allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,10 +54,26 @@
         </div>
 
     <style>
-        .thumbnails img:hover{
+        .thumbnails a,img:hover{
             cursor: grab;
         }
     </style>
+
+    <script>
+        $(document).ready(
+            function(){
+                $(".thumbnailImg").click(function(){
+                    $('iframe').attr('src', $('iframe').attr('src'));
+                    $('#largeVidDiv').addClass('hidden');
+                    $("#largeImgDiv").removeClass('hidden');
+                });
+
+                $("#video").click(function(){
+                    $('#largeVidDiv').removeClass('hidden');
+                    $("#largeImgDiv").addClass('hidden');
+                });
+        });
+    </script>
 
     </body>
 
