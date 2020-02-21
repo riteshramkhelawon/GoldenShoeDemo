@@ -7,7 +7,9 @@ class BootStrap {
         def yeezy = new Product(
                 productName : "Yeezys",
                 price : 500.50,
-                description : "Kanye West's new Yeezy boots from his new collection.",
+                shortDescription : "Kanye West's new Yeezy boots from his new collection.",
+                descriptionPoints: ["New line of Yeezys", "Flexible material to fit the shape of your foot",
+                                    "Air breathing material", "Air bubble to refresh your feet"],
                 stock : 100 ,
                 colour : "grey",
                 availableSizes : [8, 9, 10],
@@ -21,7 +23,9 @@ class BootStrap {
         def heels = new Product(
                 productName : "Heel Shoes",
                 price : 44.99,
-                description : "High heel leather shoes. Manufactured by a major fashion company in Italy",
+                shortDescription : "High heel leather shoes. Manufactured by a major fashion company in Italy",
+                descriptionPoints: ["New line of heels", "Extra high heels to give you an extra height boost",
+                                    "New heel material for more strength", "Amazing gloss finish"],
                 stock : 20 ,
                 colour : "Red",
                 availableSizes : [5, 7, 8],
@@ -35,9 +39,11 @@ class BootStrap {
         def adidas = new Product(
                 productName : "Adidas Classics",
                 price : 70.00,
-                description : "New Adidas classic black running shoes from their sports collection.",
+                shortDescription : "New Adidas classic white running shoes from their sports collection.",
+                descriptionPoints: ["New line of Adidas running shoes", "Flexible material to fit the shape of your foot",
+                                    "Air breathing material, great for running", "Air bubble to refresh your feet"],
                 stock : 75 ,
-                colour : "Black",
+                colour : "White",
                 availableSizes : [7, 9, 11],
                 type : "trainers",
                 mainImgUrl : "/assets/shoes/adidas-main.jpg",
@@ -45,9 +51,6 @@ class BootStrap {
                 thirdImgUrl : "/assets/shoes/adidas-third.jpg",
                 videoUrl: "https://www.youtube.com/embed/_sIaPgpM2v0"
         ).save()
-
-
-
     }
 
     def destroy = {

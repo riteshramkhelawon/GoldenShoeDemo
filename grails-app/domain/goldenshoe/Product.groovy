@@ -1,5 +1,7 @@
 package goldenshoe
 
+import sun.net.idn.StringPrep
+
 class Product {
      String productName
      Double price
@@ -7,7 +9,8 @@ class Product {
      String secondImgUrl
      String thirdImgUrl
      String videoUrl
-     String description
+     String shortDescription
+     String[] descriptionPoints
      int stock
      String colour
      int[] availableSizes
@@ -20,7 +23,8 @@ class Product {
         secondImgUrl nullable: false, unique: true
         thirdImgUrl nullable: false, unique: true
         videoUrl nullable: false, unique: true
-        description nullable: false, unique: true, maxSize: 250
+        shortDescription nullable: false, unique: true, maxSize: 250
+        descriptionPoints nullable: false
         stock nullable: false
         colour nullable: false
         availableSizes nullable: false
