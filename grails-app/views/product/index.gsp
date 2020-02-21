@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:g="http://www.w3.org/1999/html">
     <head>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'product.label', default: 'Product')}" />
@@ -12,15 +12,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
     </head>
     <body>
-        <section class="container">
+        <section id="productInfo" class="container">
             <h1>${product.productName}</h1>
             <hr>
-            <div class="row">
+            <div class="row pl-0">
                 <div class="col-md-5">
-                    <h2 style="color: firebrick"><em><b>Price: £<span><g:formatNumber number="${product.price}" type="currency" currencySymbol=""/></span></b></em></h2>
-                    <h3>${product.description}</h3>
-                    <h3>${product.availableSizes}</h3>
-
                     <div class="thumbnails row justify-content-center">
                         <div class="col-md-3">
                             <img class="thumbnailImg" onclick="$('#largeImgDiv').attr('src','${product.mainImgUrl}');" width="100px" src="${product.mainImgUrl}" />
@@ -36,7 +32,47 @@
                         </div>
                     </div>
 
-                    <small>In stock: ${product.stock}</small>
+                    <hr>
+                    <div class="pl-0 row">
+                        <div class="col-6">
+                            <h4>Available in sizes: </h4>
+                            <select class="btn btn-info">
+                                <g:each var="size" in="${product.availableSizes}">
+                                    <option class="dropdown-item" value="${size}">${size}</option>
+                                </g:each>
+                            </select>
+
+                        </div>
+                        <div class="col-6">
+                            <h4>Colour:</h4><span>${product.colour}</span>
+                        </div>
+                    </div>
+
+
+                    <hr>
+
+                    <h4>Description</h4>
+                    <ul class="ml-4" style="line-height: 2;">
+                        <g:each var="bulletPoint" in="${product.descriptionPoints}">
+                            <li>${bulletPoint}</li>
+                        </g:each>
+                    </ul>
+
+                    <br>
+
+
+
+
+
+                    <h4 style="color: firebrick"><em><b>Price: £<span><g:formatNumber number="${product.price}" type="currency" currencySymbol=""/></span></b></em></h4>
+                    <g:if test="${product.stock > 0}">
+                        <small class="text-success"><strong><em>In stock: ${product.stock}</em></strong></small>
+                        <br><br>
+                    </g:if>
+
+                    <button class="btn btn-info" type="button">Add to Basket</button>
+                    <button class="btn btn-info" type="button">Buy Now</button>
+
                 </div>
                 <div class="col-md-5">
                     <div class="container">
@@ -49,9 +85,8 @@
             </div>
         </section>
 
-        <div>
-            <button type="button">Buy Now</button>
-        </div>
+
+
 
     <style>
         .thumbnails a,img:hover{

@@ -50,7 +50,7 @@
                     <img src="${product.mainImgUrl}" class="card-img-top" alt="...">
                     <div class="text-center card-body">
                         <h4 class="card-title"><strong>${product.productName}</strong></h4>
-                        <p class="card-text">${product.description}</p>
+                        <p class="card-text">${product.shortDescription}</p>
                         <p class="card-text" style="color: firebrick;"><strong>£<g:formatNumber number="${product.price}" type="currency" currencySymbol=""/>
                         </strong></p>
                         <small>Available in ${product.colour}</small>
