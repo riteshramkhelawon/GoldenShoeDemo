@@ -6,6 +6,7 @@ class Product {
      String mainImgUrl
      String secondImgUrl
      String thirdImgUrl
+     String videoUrl
      String description
      int stock
      String colour
@@ -18,6 +19,7 @@ class Product {
         mainImgUrl nullable: false, unique: true
         secondImgUrl nullable: false, unique: true
         thirdImgUrl nullable: false, unique: true
+        videoUrl nullable: false, unique: true
         description nullable: false, unique: true, maxSize: 250
         stock nullable: false
         colour nullable: false

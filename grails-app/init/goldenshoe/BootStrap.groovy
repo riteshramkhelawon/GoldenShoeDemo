@@ -14,7 +14,8 @@ class BootStrap {
                 type : "stylish",
                 mainImgUrl : "/assets/shoes/yeezy-main.jpg",
                 secondImgUrl : "/assets/shoes/yeezy-second.jpg",
-                thirdImgUrl : "/assets/shoes/yeezy-third.jpg"
+                thirdImgUrl : "/assets/shoes/yeezy-third.jpg",
+                videoUrl: "https://www.youtube.com/embed/ruYWz8L2IcQ"
         ).save()
 
         def heels = new Product(
@@ -27,7 +28,8 @@ class BootStrap {
                 type : "heels",
                 mainImgUrl : "/assets/shoes/heels-main.jpg",
                 secondImgUrl : "/assets/shoes/heels-second.jpg",
-                thirdImgUrl : "/assets/shoes/heels-third.jpg"
+                thirdImgUrl : "/assets/shoes/heels-third.jpg",
+                videoUrl: "https://www.youtube.com/embed/u6jKPojkhmY"
         ).save()
 
         def adidas = new Product(
@@ -40,7 +42,8 @@ class BootStrap {
                 type : "trainers",
                 mainImgUrl : "/assets/shoes/adidas-main.jpg",
                 secondImgUrl : "/assets/shoes/adidas-second.jpg",
-                thirdImgUrl : "/assets/shoes/adidas-third.jpg"
+                thirdImgUrl : "/assets/shoes/adidas-third.jpg",
+                videoUrl: "https://www.youtube.com/embed/_sIaPgpM2v0"
         ).save()
 
 
