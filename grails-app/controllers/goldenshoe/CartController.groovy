@@ -34,16 +34,6 @@ class CartController {
             }
         }
         println("new cart: " + cart)
-//        boolean inBasketAlready = cart.contains(item)
-//
-//        println("exists: "+inBasketAlready)
-//
-//        if (item != null && !inBasketAlready){
-//            cart.add(item)
-//        }
-//
-//        println("cart: " + cart)
-//        println("cart size: " + cart.size())
 
         render(view: "checkout", model: [cart: cart])
     }
