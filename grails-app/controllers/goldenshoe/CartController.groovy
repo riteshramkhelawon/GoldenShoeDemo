@@ -10,16 +10,40 @@ class CartController {
     }
 
     def addToCart(){
-        println("item name: " + params.item)
+//        println("item name: " + params.item)
         def cart = session.CART
-        def item = params.item != null ? Product.findByProductName(params.item) : null
+        println(cart)
 
-        if (item != null && !cart.contains(item)){
-            cart.add(item)
+        def itemToAdd = params.item != null ? Product.findByProductName(params.item) : null
+        println("params: "+itemToAdd)
+
+        if (itemToAdd != null){
+            def alreadyExists = false
+
+            for(Product product in cart){
+                if(product.productName == itemToAdd.productName){
+                    alreadyExists = true
+                    break
+                }
+            }
+
+            if (!alreadyExists){
+                cart.add(itemToAdd)
+            } else {
+                println("already exists")
+            }
         }
-
-        println("cart: " + cart)
-        println("cart size: " + cart.size())
+        println("new cart: " + cart)
+//        boolean inBasketAlready = cart.contains(item)
+//
+//        println("exists: "+inBasketAlready)
+//
+//        if (item != null && !inBasketAlready){
+//            cart.add(item)
+//        }
+//
+//        println("cart: " + cart)
+//        println("cart size: " + cart.size())
 
         render(view: "checkout", model: [cart: cart])
     }
