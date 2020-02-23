@@ -3,11 +3,15 @@ package goldenshoe
 
 class CartController {
 
+    def checkout(){
+        def cart = session.CART
 
+        render(view: "checkout", model: [cart: cart])
+    }
 
-    def index(){
+    def addToCart(){
         println("item name: " + params.item)
-        List<Product> cart = (List<Integer>)session.getAttribute("CART")
+        def cart = session.CART
         def item = params.item != null ? Product.findByProductName(params.item) : null
 
         if (item != null && !cart.contains(item)){
@@ -20,12 +24,19 @@ class CartController {
         render(view: "checkout", model: [cart: cart])
     }
 
-    def addToCart(Product item) {
-        cart.add(item)
-    }
 
-    def removeFromCart(Product item) {
-        cart.remove(item)
+    def removeFromCart() {
+        def cart = session.CART
+        println("cart: " +cart)
+
+        def itemToRemove = params.item
+        println("item to remove: "+itemToRemove)
+
+        cart.retainAll{it.productName != itemToRemove}
+
+        println("new cart: "+cart)
+
+        redirect(action: "checkout")
     }
 
     def clearCart() {

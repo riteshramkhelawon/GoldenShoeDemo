@@ -54,7 +54,7 @@
                     <a class="nav-link text-light" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <form action="/cart/index">
+                    <form action="/cart/checkout">
                         <button class="btn" type="submit"><i class="nav-link fas fa-shopping-cart fa-3x"></i></button>
                     </form>
 

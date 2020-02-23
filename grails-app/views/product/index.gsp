@@ -13,11 +13,11 @@
     </head>
     <body>
     <script>
-        function ajaxCall(productName){
+        function addToBasket(productName){
                 $('#addToBasketBtn').addClass('hidden');$('#basketMessage').removeClass('hidden');
                 $('#basketMessage').delay(2500).fadeOut('slow');
 
-                var URL="${createLink(controller:'cart', action:'index')}";
+                var URL="${createLink(controller:'cart', action:'addToCart')}";
                 console.log("ajax call JS");
                 $.ajax({
                        url: URL,
@@ -75,7 +75,7 @@
                         <small class="text-success"><strong><em>In stock: ${product.stock}</em></strong></small>
                         <br><br>
                     </g:if>
-                    <button id="addToBasketBtn" class="btn btn-info" type="button" onclick="ajaxCall('${product.productName}')">Add to Basket</button>
+                    <button id="addToBasketBtn" class="btn btn-info" type="button" onclick="addToBasket('${product.productName}')">Add to Basket</button>
                     <button class="btn btn-info" type="button">Buy Now</button>
                     <br><br>
                     <div id="basketMessage" class="alert alert-success hidden">
