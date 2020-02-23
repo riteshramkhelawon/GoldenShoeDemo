@@ -32,57 +32,62 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light mb-0">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse fixed-top" id="navbarTogglerDemo01" style="background-color: firebrick;">
+            <a class="navbar-brand" href="/">Golden Shoe</a>
+            <ul class="navbar-nav navbar-right mr-5">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
 
-<nav class="navbar navbar-expand-lg navbar-light mb-0">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse fixed-top" id="navbarTogglerDemo01" style="background-color: firebrick;">
-        <a class="navbar-brand" href="/">Golden Shoe</a>
-        <ul class="navbar-nav navbar-right mr-5">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            <li class="nav-item">
-                <a class="nav-link text-light" href="#">Deals</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" href="#">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" href="#">Contact</a>
-            </li>
-        </ul>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Deals</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <form action="/cart/index">
+                        <button class="btn" type="submit"><i class="nav-link fas fa-shopping-cart fa-3x"></i></button>
+                    </form>
 
-    </div>
-</nav>
-
-<g:layoutBody/>
-
-<div class="footer" role="contentinfo" style="background-color: firebrick">
-    <div class="row">
-        <div class="col-md-6">
-            <p><b>&copy;</b> Copyright Golden Shoe 2020</p>
+                </li>
+            </ul>
         </div>
-        <div class="col-md-6">
-            <a class="text-light" href="#"><i class="fab fa-facebook-f fa-2x"></i></a>
-            <a class="text-light" href="#"><i class="fab fa-twitter fa-2x ml-5"></i></a>
-            <a class="text-light" href="#"><i class="fab fa-instagram fa-2x ml-5"></i></a>
+    </nav>
+
+    <g:layoutBody/>
+
+    <div class="footer" role="contentinfo" style="background-color: firebrick">
+        <div class="row">
+            <div class="col-md-6">
+                <p><b>&copy;</b> Copyright Golden Shoe 2020</p>
+            </div>
+            <div class="col-md-6">
+                <a class="text-light" href="#"><i class="fab fa-facebook-f fa-2x"></i></a>
+                <a class="text-light" href="#"><i class="fab fa-twitter fa-2x ml-5"></i></a>
+                <a class="text-light" href="#"><i class="fab fa-instagram fa-2x ml-5"></i></a>
+            </div>
         </div>
     </div>
-</div>
 
 
-<div id="spinner" class="spinner" style="display:none;">
-    <g:message code="spinner.alt" default="Loading&hellip;"/>
-</div>
+    <div id="spinner" class="spinner" style="display:none;">
+        <g:message code="spinner.alt" default="Loading&hellip;"/>
+    </div>
 
-<asset:javascript src="application.js"/>
-<style>
-    a.text-light:hover, a.text-light:focus {
-    color: yellow !important;
-}
-</style>
+    <asset:javascript src="application.js"/>
+    <style>
+        a.text-light:hover, a.text-light:focus {
+        color: yellow !important;
+    }
+    </style>
 </body>
 </html>
