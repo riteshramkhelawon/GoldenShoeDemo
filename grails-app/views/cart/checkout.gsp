@@ -23,13 +23,13 @@
                 <tbody>
                 <g:each var="cartItem" in="${cart}">
                     <tr>
-                        <td><h4>${cartItem.productName}</h4></td>
-                        <td><h4>${cartItem.availableSizes[0]}</h4></td>
-                        <td><h4><input type="number" min="1" max="10" id="quantity" name="quantity" onchange="$('#productQuantity-${cartItem.productName}').val($(this).val())"></h4></td>
-                        <td><h4>£<g:formatNumber number="${cartItem.price}" type="currency" currencySymbol=""/></h4></td>
+                        <td><h4>${cartItem.product.productName}</h4></td>
+                        <td><h4>${cartItem.size}</h4></td>
+                        <td><h4>${cartItem.quantity}</h4></td>
+                        <td><h4>£<g:formatNumber number="${cartItem.product.price}" type="currency" currencySymbol=""/></h4></td>
                         <td>
                             <form action="/cart/removeFromCart">
-                                <input type="hidden" name="item" value="${cartItem.productName}" />
+                                <input type="hidden" name="item" value="${cartItem.id}" />
                                 <button type="submit" class="btn" style="background-color: transparent;"><i class="fas fa-trash-alt fa-2x text-danger"></i></button>
                             </form>
                         </td>
@@ -67,9 +67,7 @@
                 <div class="text-center">
                     <button class="btn btn-info" type="submit">Checkout & Pay</button>
                 </div>
-                <g:each var="product" in="${cart}">
-                    <input type="hidden" id="productQuantity-${product.productName}" name="productQuantity-${product.productName}" />
-                </g:each>
+
             </form>
         </section>
     </g:if>
