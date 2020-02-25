@@ -8,7 +8,7 @@ class HomeController {
         def products = Product.findAll()
 
         if (!session.getAttribute("CART")){
-            session.setAttribute("CART", new ArrayList<Product>())
+            session.setAttribute("CART", new ArrayList<CartProduct>())
             println("cart created")
         } else {
             println("cart already exists")
