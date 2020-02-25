@@ -1,10 +1,10 @@
 package goldenshoe
 
-import org.codehaus.groovy.runtime.InvokerHelper
-import org.hibernate.criterion.Order
-
+import org.apache.commons.lang.RandomStringUtils
 
 class CartController {
+
+    CartProductService cartProductService
 
     def checkout(){
         def cart = session.CART
@@ -13,33 +13,42 @@ class CartController {
     }
 
     def addToCart(){
-//        println("item name: " + params.item)
         def cart = session.CART
-        println(cart)
-        println("params: "+params.item+", " + params.chosenSize)
+        def productName = params.item
+        def size = params.int('size')
+        def quantity = params.int('quantity')
 
-        Product itemToAdd = params.item != null ? Product.findByProductName(params.item) : null
-        Product itemCopy = new Product()
-        InvokerHelper.setProperties(itemCopy, itemToAdd.properties)
+        Product productToAdd = productName != null ? Product.findByProductName(productName) : null
 
-        if (itemToAdd != null){
+        println("params: "+productToAdd+", "+size+", "+quantity)
+
+        if(productName != null && size != null && quantity != null){
             def alreadyExists = false
 
-            for(Product product in cart){
-                if(product.productName == itemToAdd.productName){
+            def newCartProduct = new CartProduct(
+                    product: productToAdd,
+                    size: size,
+                    quantity: quantity
+            ).save(flush: true)
+
+            println("CP: "+newCartProduct)
+
+            for(CartProduct cartProduct in cart){
+                if (cartProduct.product.productName == newCartProduct.product.productName){
                     alreadyExists = true
                     break
                 }
             }
 
             if (!alreadyExists){
-                itemCopy.availableSizes = params.chosenSize.toInteger()
-                cart.add(itemCopy)
+                cart.add(newCartProduct)
+                println(productToAdd.productName + " added to cart")
             } else {
-                println("already exists")
+                println("item already exists in cart")
             }
+
+            println("new cart: " + cart)
         }
-        println("new cart: " + cart)
 
         render(view: "checkout", model: [cart: cart])
     }
@@ -47,12 +56,13 @@ class CartController {
 
     def removeFromCart() {
         def cart = session.CART
-        println("cart: " +cart)
+        CartProduct cartProductToRemove = CartProduct.findById(params.item)
 
-        def itemToRemove = params.item
-        println("item to remove: "+itemToRemove)
+        println("item to remove: "+cartProductToRemove)
 
-        cart.retainAll{it.productName != itemToRemove}
+        cart.retainAll{it.id != cartProductToRemove.id}
+
+        cartProductService.delete(cartProductToRemove.id)
 
         println("new cart: "+cart)
 
@@ -60,43 +70,26 @@ class CartController {
     }
 
     def completeOrder(){
+        def cart = session.CART
         def customerName = params.name
         def mobile = params.mobile
-        def addressLine1 = params.addressLine1
-        def postcode = params.postcode
-        def cardNo = params.cardNo
+        def customerAddress = params.addressLine1 +", " + params.postcode
 
-        def quantitiesParams = params.findAll{it.key.startsWith("productQuantity")}
+        def orderNumber = RandomStringUtils.randomAlphanumeric(6)
 
-        println("quants: "+quantitiesParams)
+        println("orderNo: "+orderNumber)
 
-        def cart = session.CART
-        def confirmationCart = cart.clone()
-        def orderNo = new Random().nextInt(9)
-
-        println("conf cart: "+confirmationCart)
-        Map<String, String> sizes = new HashMap<String, String>()
-
-
-
-        for(Product product in confirmationCart){
-            sizes.put(product.productName, product.availableSizes.toString())
-        }
-
-        def newOrder = new OrdersMade(
-                orderNumber: orderNo,
-                customer: customerName,
-                productSize: sizes,
-                productQuantity: quantitiesParams
+        CustomerOrder newOrder = new CustomerOrder(
+                orderNumber: orderNumber,
+                products: cart,
+                customerName: customerName,
+                customerAddress: customerAddress,
+                customerTelephone: mobile,
+                status: "Dispatching"
         ).save(flush: true)
 
-        println("saved " + newOrder)
-
-
-        render(view: "confirmation", model: [customerName: customerName, mobile: mobile, addressLine1: addressLine1,
-                                            postcode: postcode, cardNo: cardNo, cart: confirmationCart, order: newOrder])
-
-
+        render(view: "confirmation", model: [customerName: customerName, mobile: mobile, customerAddress: customerAddress,
+                                             order: newOrder])
     }
 
     def clearCart(){
