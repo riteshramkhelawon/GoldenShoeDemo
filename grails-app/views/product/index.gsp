@@ -13,7 +13,7 @@
     </head>
     <body>
     <script>
-        function addToBasket(productName, size){
+        function addToBasket(productName, size, quantity){
                 $('#addToBasketBtn').addClass('hidden');$('#basketMessage').removeClass('hidden');
                 $('#basketMessage').delay(2500).fadeOut('slow');
 
@@ -21,7 +21,7 @@
                 console.log("ajax call JS");
                 $.ajax({
                        url: URL,
-                       data: {item: productName, chosenSize: size},
+                       data: {item: productName, size: size, quantity: quantity},
                        success: function(resp){
                        console.log("ajax call done");
                    }
@@ -59,7 +59,7 @@
                             <input type="hidden" name="size" id="chosenSize" />
                         </div>
                         <div class="col-6">
-                            <h4>Colour:</h4><span>${product.colour}</span>
+                            <h4>Quantity:</h4><input type="number" name="quantity" id="quantity" min="1" max="${product.stock}"/>
                         </div>
                     </div>
                     <hr>
@@ -76,7 +76,7 @@
                         <br><br>
                     </g:if>
 
-                    <button id="addToBasketBtn" class="btn btn-info" type="button" onclick="addToBasket('${product.productName}', $('#chosenSize').val())">Add to Basket</button>
+                    <button id="addToBasketBtn" class="btn btn-info" type="button" onclick="addToBasket('${product.productName}', $('#chosenSize').val(), $('#quantity').val())">Add to Basket</button>
                     <button class="btn btn-info" type="button">Buy Now</button>
                     <br><br>
                     <div id="basketMessage" class="alert alert-success hidden">
