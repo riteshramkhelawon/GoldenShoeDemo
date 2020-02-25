@@ -1,7 +1,5 @@
 package goldenshoe
 
-import sun.net.idn.StringPrep
-
 class Product {
      String productName
      Double price
