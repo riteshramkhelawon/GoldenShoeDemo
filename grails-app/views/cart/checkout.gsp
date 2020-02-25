@@ -25,7 +25,7 @@
                     <tr>
                         <td><h4>${cartItem.productName}</h4></td>
                         <td><h4>${cartItem.availableSizes[0]}</h4></td>
-                        <td><h4><input type="number" min="1" max="10"></h4></td>
+                        <td><h4><input type="number" min="1" max="10" id="quantity" name="quantity" onchange="$('#productQuantity-${cartItem.productName}').val($(this).val())"></h4></td>
                         <td><h4>£<g:formatNumber number="${cartItem.price}" type="currency" currencySymbol=""/></h4></td>
                         <td>
                             <form action="/cart/removeFromCart">
@@ -42,32 +42,36 @@
             <h5>There are no items in your basket</h5>
         </g:else>
     </section>
+    <g:if test="${cart.size() > 0}">
+        <hr>
 
-    <hr>
-
-    <section id="userDetails" class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h2 class="text-secondary">Your Details</h2>
-                <label class="mb-3" for="name">Full name:</label><br><input class="mb-3" type="text" id="name" name="name" /><br>
-                <label class="mb-3" for="mobile">Telephone:</label><br><input class="mb-3" type="text" id="mobile" name="mobile" /><br>
-                <label class="mb-3" for="addressLine1">Address Line 1:</label><br><input class="mb-3" type="text" id="addressLine1" name="addressLine1" /><br>
-                <label class="mb-3" for="postcode">Post Code:</label><br><input class="mb-3" type="text" id="postcode" name="postcode" />
-            </div>
-
-            <div class="col-md-6">
-                <h2 class="text-secondary">Payment Details</h2>
-                <label class="mb-3" for="carholder">Cardholder's Name:</label><br><input class="mb-3" type="text" id="carholder" name="carholder" /><br>
-                <label class="mb-3" for="cardNo">Card Number:</label><br><input class="mb-3" type="text" id="cardNo" name="cardNo" /><br>
-                <label class="mb-3" for="expDate">Expiry Date:</label><br><input class="mb-3" type="text" id="expDate" name="expDate" /><br>
-                <label class="mb-3" for="ccv">CCV:</label><br><input class="mb-3" type="text" id="ccv" name="ccv" /><br><br>
-            </div>
-        </div>
-        <div class="text-center">
+        <section id="userDetails" class="container">
             <form action="/cart/completeOrder">
-                <button class="btn btn-info" type="submit">Checkout & Pay</button>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="text-secondary">Your Details</h2>
+                        <label class="mb-3" for="name">Full name:</label><br><input class="mb-3" type="text" id="name" name="name" /><br>
+                        <label class="mb-3" for="mobile">Telephone:</label><br><input class="mb-3" type="text" id="mobile" name="mobile" /><br>
+                        <label class="mb-3" for="addressLine1">Address Line 1:</label><br><input class="mb-3" type="text" id="addressLine1" name="addressLine1" /><br>
+                        <label class="mb-3" for="postcode">Post Code:</label><br><input class="mb-3" type="text" id="postcode" name="postcode" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <h2 class="text-secondary">Payment Details</h2>
+                        <label class="mb-3" for="carholder">Cardholder's Name:</label><br><input class="mb-3" type="text" id="carholder" name="carholder" /><br>
+                        <label class="mb-3" for="cardNo">Card Number:</label><br><input class="mb-3" type="text" id="cardNo" name="cardNo" /><br>
+                        <label class="mb-3" for="expDate">Expiry Date:</label><br><input class="mb-3" type="text" id="expDate" name="expDate" /><br>
+                        <label class="mb-3" for="ccv">CCV:</label><br><input class="mb-3" type="text" id="ccv" name="ccv" /><br><br>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-info" type="submit">Checkout & Pay</button>
+                </div>
+                <g:each var="product" in="${cart}">
+                    <input type="hidden" id="productQuantity-${product.productName}" name="productQuantity-${product.productName}" />
+                </g:each>
             </form>
-        </div>
-    </section>
+        </section>
+    </g:if>
 </body>
 </html>

@@ -13,7 +13,7 @@
     </head>
     <body>
     <script>
-        function addToBasket(productName){
+        function addToBasket(productName, size){
                 $('#addToBasketBtn').addClass('hidden');$('#basketMessage').removeClass('hidden');
                 $('#basketMessage').delay(2500).fadeOut('slow');
 
@@ -21,7 +21,7 @@
                 console.log("ajax call JS");
                 $.ajax({
                        url: URL,
-                       data: {item: productName},
+                       data: {item: productName, chosenSize: size},
                        success: function(resp){
                        console.log("ajax call done");
                    }
@@ -51,12 +51,12 @@
                     <div class="pl-0 row">
                         <div class="col-6">
                             <h4>Available in sizes: </h4>
-                            <select class="btn btn-info">
+                            <select id="selectSize" class="btn btn-info">
                                 <g:each var="size" in="${product.availableSizes}">
                                     <option class="dropdown-item" value="${size}">${size}</option>
                                 </g:each>
                             </select>
-
+                            <input type="hidden" name="size" id="chosenSize" />
                         </div>
                         <div class="col-6">
                             <h4>Colour:</h4><span>${product.colour}</span>
@@ -75,7 +75,8 @@
                         <small class="text-success"><strong><em>In stock: ${product.stock}</em></strong></small>
                         <br><br>
                     </g:if>
-                    <button id="addToBasketBtn" class="btn btn-info" type="button" onclick="addToBasket('${product.productName}')">Add to Basket</button>
+
+                    <button id="addToBasketBtn" class="btn btn-info" type="button" onclick="addToBasket('${product.productName}', $('#chosenSize').val())">Add to Basket</button>
                     <button class="btn btn-info" type="button">Buy Now</button>
                     <br><br>
                     <div id="basketMessage" class="alert alert-success hidden">
@@ -101,6 +102,7 @@
 
     <script>
         $(document).ready(
+
             function(){
                 $(".thumbnailImg").click(function(){
                     $('iframe').attr('src', $('iframe').attr('src'));
@@ -112,6 +114,13 @@
                     $('#largeVidDiv').removeClass('hidden');
                     $("#largeImgDiv").addClass('hidden');
                 });
+
+                $('#selectSize').change(function(){
+<!--                    alert($(this).val());-->
+                    var size = $(this).val();
+                    $('#chosenSize').val(size);
+                    console.log($('#chosenSize').val());
+                })
 
 
         });
