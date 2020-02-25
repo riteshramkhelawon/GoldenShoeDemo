@@ -8,8 +8,13 @@ class CartController {
 
     def checkout(){
         def cart = session.CART
+        def totalPrice = 0
 
-        render(view: "checkout", model: [cart: cart])
+        for(CartProduct cartProduct in cart){
+            totalPrice = totalPrice + cartProduct.product.price*cartProduct.quantity
+        }
+
+        render(view: "checkout", model: [cart: cart, totalPrice: totalPrice])
     }
 
     def addToCart(){
@@ -74,10 +79,15 @@ class CartController {
         def customerName = params.name
         def mobile = params.mobile
         def customerAddress = params.addressLine1 +", " + params.postcode
+        def totalPrice = 0
 
         def orderNumber = RandomStringUtils.randomAlphanumeric(6)
 
         println("orderNo: "+orderNumber)
+
+        for(CartProduct cartProduct in cart){
+            totalPrice = totalPrice + cartProduct.product.price*cartProduct.quantity
+        }
 
         CustomerOrder newOrder = new CustomerOrder(
                 orderNumber: orderNumber,
@@ -85,11 +95,13 @@ class CartController {
                 customerName: customerName,
                 customerAddress: customerAddress,
                 customerTelephone: mobile,
+                totalPrice: totalPrice,
                 status: "Dispatching"
         ).save(flush: true)
 
+
         render(view: "confirmation", model: [customerName: customerName, mobile: mobile, customerAddress: customerAddress,
-                                             order: newOrder])
+                                             order: newOrder, totalPrice: totalPrice])
     }
 
     def clearCart(){

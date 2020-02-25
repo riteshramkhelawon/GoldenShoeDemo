@@ -7,6 +7,7 @@ class CustomerOrder {
     String customerAddress
     String customerTelephone
     String status
+    Double totalPrice
     Date dateCreated
 
 
@@ -17,5 +18,6 @@ class CustomerOrder {
         customerAddress nullable: false
         customerTelephone nullable: false
         status nullable: false
+        totalPrice nulable: false
     }
 }

@@ -34,6 +34,13 @@
                     <td><h4>£<g:formatNumber number="${cartProduct.product.price}" type="currency" currencySymbol=""/></h4></td>
                 </tr>
             </g:each>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="text-right"><h4><strong>Total:</strong></h4></td>
+                    <td><h4><strong>£<g:formatNumber number="${totalPrice}" type="currency" currencySymbol=""/></strong></h4></td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
     </section>

@@ -35,8 +35,16 @@
                         </td>
                     </tr>
                 </g:each>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right"><h4><strong>Total:</strong></h4></td>
+                        <td><h4><strong>£<g:formatNumber number="${totalPrice}" type="currency" currencySymbol=""/></strong></h4></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
+
         </g:if>
         <g:else>
             <h5>There are no items in your basket</h5>
