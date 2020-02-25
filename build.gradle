@@ -57,6 +57,9 @@ dependencies {
     testCompile "org.grails:grails-web-testing-support"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+    
+    //added
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
 }
 
 bootRun {
