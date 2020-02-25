@@ -1,5 +1,8 @@
 package goldenshoe
 
+import org.codehaus.groovy.runtime.InvokerHelper
+import org.hibernate.criterion.Order
+
 
 class CartController {
 
@@ -13,9 +16,11 @@ class CartController {
 //        println("item name: " + params.item)
         def cart = session.CART
         println(cart)
+        println("params: "+params.item+", " + params.chosenSize)
 
-        def itemToAdd = params.item != null ? Product.findByProductName(params.item) : null
-        println("params: "+itemToAdd)
+        Product itemToAdd = params.item != null ? Product.findByProductName(params.item) : null
+        Product itemCopy = new Product()
+        InvokerHelper.setProperties(itemCopy, itemToAdd.properties)
 
         if (itemToAdd != null){
             def alreadyExists = false
@@ -28,7 +33,8 @@ class CartController {
             }
 
             if (!alreadyExists){
-                cart.add(itemToAdd)
+                itemCopy.availableSizes = params.chosenSize.toInteger()
+                cart.add(itemCopy)
             } else {
                 println("already exists")
             }
@@ -53,9 +59,55 @@ class CartController {
         redirect(action: "checkout")
     }
 
-    def clearCart() {
-        cart.clear()
+    def completeOrder(){
+        def customerName = params.name
+        def mobile = params.mobile
+        def addressLine1 = params.addressLine1
+        def postcode = params.postcode
+        def cardNo = params.cardNo
+
+        def quantitiesParams = params.findAll{it.key.startsWith("productQuantity")}
+
+        println("quants: "+quantitiesParams)
+
+        def cart = session.CART
+        def confirmationCart = cart.clone()
+        def orderNo = new Random().nextInt(9)
+
+        println("conf cart: "+confirmationCart)
+        Map<String, String> sizes = new HashMap<String, String>()
+
+
+
+        for(Product product in confirmationCart){
+            sizes.put(product.productName, product.availableSizes.toString())
+        }
+
+        def newOrder = new OrdersMade(
+                orderNumber: orderNo,
+                customer: customerName,
+                productSize: sizes,
+                productQuantity: quantitiesParams
+        ).save(flush: true)
+
+        println("saved " + newOrder)
+
+
+        render(view: "confirmation", model: [customerName: customerName, mobile: mobile, addressLine1: addressLine1,
+                                            postcode: postcode, cardNo: cardNo, cart: confirmationCart, order: newOrder])
+
+
     }
+
+    def clearCart(){
+        def cart = session.CART
+        cart.clear()
+
+        redirect action: 'index', controller: 'home', namespace: null
+    }
+
+
+
 
 
 
