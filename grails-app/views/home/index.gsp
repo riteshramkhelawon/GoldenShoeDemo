@@ -55,7 +55,13 @@
                         </strong></p>
                         <small>Available in ${product.colour}</small>
                         <br>
-                        <small class="text-success"><em><strong>In Stock</strong></em></small>
+                        <g:if test="${product.stock > 0}">
+                            <small class="text-success"><em><strong>In Stock</strong></em></small>
+                        </g:if>
+                        <g:else>
+                            <small class="text-danger"><em><strong>Out of Stock</strong></em></small>
+                        </g:else>
+
                         <br><br>
                         <form action="/product/index" method="get">
                             <input type="hidden" name="productName" value="${product.productName}">

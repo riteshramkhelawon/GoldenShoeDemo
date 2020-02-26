@@ -59,7 +59,10 @@
                             <input type="hidden" name="size" id="chosenSize" />
                         </div>
                         <div class="col-6">
-                            <h4>Quantity:</h4><input type="number" name="quantity" id="quantity" min="1" max="${product.stock}"/>
+                            <g:if test="${product.stock > 0}">
+                                <h4>Quantity:</h4><input type="number" name="quantity" id="quantity" min="1" max="${product.stock}" value="1"/>
+                            </g:if>
+
                         </div>
                     </div>
                     <hr>
@@ -74,10 +77,14 @@
                     <g:if test="${product.stock > 0}">
                         <small class="text-success"><strong><em>In stock: ${product.stock}</em></strong></small>
                         <br><br>
+                        <button id="addToBasketBtn" class="btn btn-info" type="button" onclick="addToBasket('${product.productName}', $('#chosenSize').val(), $('#quantity').val())">Add to Basket</button>
+                        <button class="btn btn-info" type="button">Buy Now</button>
                     </g:if>
+                    <g:else>
+                        <small class="text-danger"><strong><em>Sorry this item is out of stock</em></strong></small>
+                    </g:else>
 
-                    <button id="addToBasketBtn" class="btn btn-info" type="button" onclick="addToBasket('${product.productName}', $('#chosenSize').val(), $('#quantity').val())">Add to Basket</button>
-                    <button class="btn btn-info" type="button">Buy Now</button>
+
                     <br><br>
                     <div id="basketMessage" class="alert alert-success hidden">
                         <h5>Added to basket</h5>
