@@ -87,6 +87,8 @@ class CartController {
 
         for(CartProduct cartProduct in cart){
             totalPrice = totalPrice + cartProduct.product.price*cartProduct.quantity
+
+            cartProduct.product.stock = cartProduct.product.stock - cartProduct.quantity
         }
 
         CustomerOrder newOrder = new CustomerOrder(
