@@ -45,7 +45,7 @@
                 </form>
 
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Deals</a>
+                    <a class="nav-link text-light" href="/trackOrder">Track Order</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="#">About</a>
