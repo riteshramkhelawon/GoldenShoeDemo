@@ -6,6 +6,33 @@
     <title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
 <body>
+    <script>
+         function applyVoucherCode(voucherCode, totalPrice){
+                var URL="${createLink(controller:'cart', action:'calculateDiscountedTotal')}";
+                console.log("ajax call - voucher");
+                $.ajax({
+                       url: URL,
+                       data: {voucherCode: voucherCode, totalPrice: totalPrice},
+                       success: function(resp){
+                            console.log("voucher code applied: " + resp.valid +", "+resp.discountedTotal);
+                            if(resp.valid == true){
+                                $('#validVoucherCode').removeClass('hidden');
+                                $('#invalidVoucherCode').addClass('hidden');
+                                $('#discountedTotalTableRow').removeClass('hidden');
+                                $('#discountedTotal').html(resp.discountedTotal.toFixed(2));
+                                $('#discountedTotalHidden').val(resp.discountedTotal.toFixed(2));
+                                $('#applyCodeBtn').prop('disabled', true);
+                                $('#wasVoucherApplied').val(true);
+                            } else {
+                                $('#invalidVoucherCode').removeClass('hidden');
+                                $('#validVoucherCode').addClass('hidden');
+                                $('#discountedTotalHidden').val(resp.discountedTotal.toFixed(2));
+                            }
+                   }
+                });
+            }
+    </script>
+
     <section id="cartContents" class="container">
         <h1>Your Basket</h1>
         <hr>
@@ -42,8 +69,24 @@
                         <td><h4><strong>£<g:formatNumber number="${totalPrice}" type="currency" currencySymbol=""/></strong></h4></td>
                         <td></td>
                     </tr>
+                    <tr id="discountedTotalTableRow" class="hidden">
+                        <td></td>
+                        <td></td>
+                        <td class="text-right text-info"><h4><strong>Discounted Total:</strong></h4></td>
+                        <td><h4><strong>£</strong><strong id="discountedTotal"><g:formatNumber number="${totalPrice}" type="currency" currencySymbol=""/></strong></h4></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
+
+            <div>
+                <h4>Have a voucher code? Enter your code here to get a discount!</h4>
+                <input class="" type="text" name="voucherCode" id="voucherCode" />
+                <button id="applyCodeBtn" type="button" class="btn btn-info" onclick="applyVoucherCode($('#voucherCode').val(), ${totalPrice});">Apply Code</button>
+                <br>
+                <small class="hidden text-success" id="validVoucherCode">Voucher Code Applied</small>
+                <small class="hidden text-danger" id="invalidVoucherCode">Sorry, this voucher code is not valid</small>
+            </div>
 
         </g:if>
         <g:else>
@@ -75,7 +118,8 @@
                 <div class="text-center">
                     <button class="btn btn-info" type="submit">Checkout & Pay</button>
                 </div>
-
+                <input type="hidden" id="discountedTotalHidden" name="discountedTotalHidden" value="${totalPrice}"/>
+                <input type="hidden" id="wasVoucherApplied" name="wasVoucherApplied" value="false"/>
             </form>
         </section>
     </g:if>

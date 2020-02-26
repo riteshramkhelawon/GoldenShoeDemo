@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:g="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="layout" content="main" />
@@ -37,7 +37,7 @@
                 <tr>
                     <td></td>
                     <td></td>
-                    <td class="text-right"><h4><strong>Total:</strong></h4></td>
+                    <td class="text-right"><h4><strong>Total<g:if test="${wasVoucherApplied}"> (with discount)</g:if>:</strong></h4></td>
                     <td><h4><strong>£<g:formatNumber number="${totalPrice}" type="currency" currencySymbol=""/></strong></h4></td>
                     <td></td>
                 </tr>

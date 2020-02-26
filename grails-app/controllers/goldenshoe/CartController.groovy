@@ -1,6 +1,7 @@
 package goldenshoe
 
 import org.apache.commons.lang.RandomStringUtils
+import grails.converters.JSON
 
 class CartController {
 
@@ -79,17 +80,21 @@ class CartController {
         def customerName = params.name
         def mobile = params.mobile
         def customerAddress = params.addressLine1 +", " + params.postcode
-        def totalPrice = 0
+        Double totalPrice = params.double('discountedTotalHidden')
+        Boolean wasVoucherApplied = params.boolean('wasVoucherApplied')
 
         def orderNumber = RandomStringUtils.randomAlphanumeric(6)
 
         println("orderNo: "+orderNumber)
 
         for(CartProduct cartProduct in cart){
-            totalPrice = totalPrice + cartProduct.product.price*cartProduct.quantity
-
+//            totalPrice = totalPrice + cartProduct.product.price*cartProduct.quantity
+//
             cartProduct.product.stock = cartProduct.product.stock - cartProduct.quantity
         }
+
+        println("params price: "+totalPrice)
+        println("params wasVoucherApplied: "+wasVoucherApplied)
 
         CustomerOrder newOrder = new CustomerOrder(
                 orderNumber: orderNumber,
@@ -103,7 +108,7 @@ class CartController {
 
 
         render(view: "confirmation", model: [customerName: customerName, mobile: mobile, customerAddress: customerAddress,
-                                             order: newOrder, totalPrice: totalPrice])
+                                             order: newOrder, totalPrice: totalPrice, wasVoucherApplied: wasVoucherApplied])
     }
 
     def clearCart(){
@@ -113,14 +118,28 @@ class CartController {
         redirect action: 'index', controller: 'home', namespace: null
     }
 
+    def calculateDiscountedTotal(){
+        def voucherCode = params.voucherCode
+        def totalPrice = params.double('totalPrice')
+        def valid
+        def today = new Date()
+
+        println("voucher code: " + voucherCode)
+        println("totalPrice: " + totalPrice)
+
+        Voucher voucher = Voucher.findByVoucherCode(voucherCode)
+
+        if (voucher && today < voucher.expiry){
+            valid = true
+            double discount = totalPrice*voucher.discount
+            totalPrice = totalPrice - discount
+            println("new Price: " + totalPrice)
+        } else {
+            valid = false
+        }
+
+        render ([valid: valid, discountedTotal: totalPrice] as JSON)
 
 
-
-
-
-
-
-
-
-
+    }
 }
