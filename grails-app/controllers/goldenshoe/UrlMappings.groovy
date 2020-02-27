@@ -11,6 +11,7 @@ class UrlMappings {
 
         "/"(controller:"home", action:"index")
         "/trackOrder"(view: "/trackOrder")
+        "/faqs"(view: "/faqs")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }

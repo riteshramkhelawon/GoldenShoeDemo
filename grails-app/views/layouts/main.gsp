@@ -51,7 +51,7 @@
                     <a class="nav-link text-light" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Contact</a>
+                    <a class="nav-link text-light" href="/faqs" href="#">FAQs</a>
                 </li>
                 <li class="nav-item">
                     <form action="/cart/checkout">
