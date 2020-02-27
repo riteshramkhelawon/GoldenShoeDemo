@@ -8,19 +8,32 @@
     <body>
     <script>
         function addToBasket(productName, size, quantity){
-                $('#addToBasketBtn').addClass('hidden');$('#basketMessage').removeClass('hidden');
-                $('#basketMessage').delay(2500).fadeOut('slow');
+            $('#addToBasketBtn').addClass('hidden');$('#basketMessage').removeClass('hidden');
+            $('#basketMessage').delay(2500).fadeOut('slow');
 
-                var URL="${createLink(controller:'cart', action:'addToCart')}";
-                console.log("ajax call JS");
-                $.ajax({
-                       url: URL,
-                       data: {item: productName, size: size, quantity: quantity},
-                       success: function(resp){
-                       console.log("ajax call done");
-                   }
-                });
-            }
+            var URL="${createLink(controller:'cart', action:'addToCart')}";
+            console.log("ajax call JS");
+            $.ajax({
+                   url: URL,
+                   data: {item: productName, size: size, quantity: quantity},
+                   success: function(resp){
+                   console.log("ajax call done");
+               }
+            });
+        }
+
+        function findSize(mostUsedBrand, footShape, usualSize){
+            var URL="${createLink(controller:'product', action:'findSize')}";
+            console.log("ajax call find size");
+            $.ajax({
+                   url: URL,
+                   data: {mostUsedBrand: mostUsedBrand, footShape: footShape, usualSize: usualSize},
+                   success: function(resp){
+                        console.log("ajax call size found: " + resp);
+                        $('#recommendedSize').html(resp);
+               }
+            });
+        }
     </script>
         <section id="productInfo" class="container">
             <h1>${product.productName}</h1>
@@ -50,8 +63,15 @@
                                     <option class="dropdown-item" value="${size}">${size}</option>
                                 </g:each>
                             </select>
+                            <br><br>
+                            <div>
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+                                    Find your size
+                                </button>
+                            </div>
                             <input type="hidden" name="size" id="chosenSize" />
                         </div>
+
                         <div class="col-6">
                             <g:if test="${product.stock > 0}">
                                 <h4>Quantity:</h4><input type="number" name="quantity" id="quantity" min="1" max="${product.stock}" value="1"/>
@@ -95,6 +115,53 @@
             </div>
         </section>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="bg-info modal-header">
+                    <div class="ml-auto">
+                        <h3 class="text-center modal-title text-light" id="exampleModalLongTitle">Let's find your size</h3>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <label for="mostUsedBrand">Which brand of shoe do you wear most often?</label>
+                        <br>
+                        <select class="form-control" id="mostUsedBrand" name="mostUsedBrand">
+                            <option value="Adidas">Adidas</option>
+                            <option value="Nike">Nike</option>
+                            <option value="Reebok">Reebok</option>
+                        </select>
+                        <br><br>
+                        <label for="footShape">How would you describe your foot shape?</label>
+                        <br>
+                        <select class="form-control" id="footShape" name="footShape">
+                            <option value="Narrow">Narrow</option>
+                            <option value="Average">Average</option>
+                            <option value="Wide">Wide</option>
+                        </select>
+                        <br><br>
+                        <label for="usualSize">Which size do you usually wear?</label>
+                        <br>
+                        <select class="form-control" id="usualSize" name="footShape">
+                            <g:each var="size" in="${(4..<12)}">
+                                <option value="${size}" name="usualSize">Size ${size}</option>
+                            </g:each>
+                        </select>
+                </div>
+                <div class="bg-info modal-footer">
+                    <div class="text-center mx-auto">
+                        <button onclick="findSize($('#mostUsedBrand').val(),$('#footShape').val(),$('#usualSize').val());" type="button" class="btn btn-light" >Find your size</button>
+                        <h3>Your recommended size is: <strong id="recommendedSize"></strong></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <style>
         .thumbnails a,img:hover{
             cursor: grab;
@@ -117,7 +184,6 @@
                 });
 
                 $('#selectSize').change(function(){
-<!--                    alert($(this).val());-->
                     var size = $(this).val();
                     $('#chosenSize').val(size);
                     console.log($('#chosenSize').val());

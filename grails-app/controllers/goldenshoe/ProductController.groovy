@@ -2,10 +2,12 @@ package goldenshoe
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
+import groovy.sql.Sql
 
 class ProductController {
 
     ProductService productService
+    def dataSource
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -15,6 +17,28 @@ class ProductController {
 
         render(view: "index", model: [product: product])
 
+    }
+
+    def findSize(){
+        def sql = new Sql(dataSource)
+        def mostUsedBrand = params.mostUsedBrand
+        def footShape = params.footShape
+        def usualSize = params.usualSize
+
+        println("find size: "+mostUsedBrand+", "+footShape+", "+usualSize)
+
+        def recommendationRow = sql.rows("SELECT recommendation FROM recommended_size WHERE brand='"+mostUsedBrand+"' AND shape='"+footShape+"' AND usual_size="+usualSize)
+//
+        sql.close()
+
+        if (recommendationRow.size() > 0){
+            def recommendationValue = recommendationRow.collect{it.values()}.get(0)
+            println("rec: "+recommendationValue)
+
+            render recommendationValue.max()
+        } else {
+            render "Size not found"
+        }
     }
 
     def show(Long id) {
