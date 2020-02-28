@@ -12,4 +12,8 @@ class CartProduct {
         quantity nullable: false
     }
 
+    static mapping = {
+        product cascade: 'merge'
+    }
+
 }

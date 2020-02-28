@@ -20,4 +20,8 @@ class CustomerOrder {
         status nullable: false
         totalPrice nulable: false
     }
+
+    static mapping = {
+        products cascade: 'merge'
+    }
 }
