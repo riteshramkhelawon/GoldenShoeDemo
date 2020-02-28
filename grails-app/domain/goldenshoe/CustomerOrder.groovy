@@ -22,6 +22,6 @@ class CustomerOrder {
     }
 
     static mapping = {
-        products cascade: 'merge'
+        products cascade: 'evict'
     }
 }
