@@ -11,9 +11,4 @@ class CartProduct {
         size nullable: false
         quantity nullable: false
     }
-
-    static mapping = {
-        product cascade: 'merge'
-    }
-
 }
