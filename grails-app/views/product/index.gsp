@@ -8,18 +8,22 @@
     <body>
     <script>
         function addToBasket(productName, size, quantity){
-            $('#addToBasketBtn').addClass('hidden');$('#basketMessage').removeClass('hidden');
-            $('#basketMessage').delay(2500).fadeOut('slow');
+            if(size){
+                $('#addToBasketBtn').addClass('hidden');$('#basketMessage').removeClass('hidden');
+                $('#basketMessage').delay(2500).fadeOut('slow');
 
-            var URL="${createLink(controller:'cart', action:'addToCart')}";
-            console.log("ajax call JS");
-            $.ajax({
-                   url: URL,
-                   data: {item: productName, size: size, quantity: quantity},
-                   success: function(resp){
-                   console.log("ajax call done");
-               }
-            });
+                var URL="${createLink(controller:'cart', action:'addToCart')}";
+                console.log("ajax call JS");
+                $.ajax({
+                       url: URL,
+                       data: {item: productName, size: size, quantity: quantity},
+                       success: function(resp){
+                       console.log("ajax call done");
+                   }
+                });
+            } else {
+                alert('Please select a size before adding to the basket');
+            }
         }
 
         function findSize(mostUsedBrand, footShape, usualSize){
@@ -58,7 +62,8 @@
                     <div class="pl-0 row">
                         <div class="col-6">
                             <h4>Available in sizes: </h4>
-                            <select id="selectSize" class="btn btn-info">
+                            <select required id="selectSize" class="btn btn-info">
+                                <option selected="selected" disabled>Select a size</option>
                                 <g:each var="size" in="${product.availableSizes}">
                                     <option class="dropdown-item" value="${size}">${size}</option>
                                 </g:each>
@@ -92,7 +97,7 @@
                         <small class="text-success"><strong><em>In stock: ${product.stock}</em></strong></small>
                         <br><br>
                         <button id="addToBasketBtn" class="btn btn-info" type="button" onclick="addToBasket('${product.productName}', $('#chosenSize').val(), $('#quantity').val())">Add to Basket</button>
-                        <button class="btn btn-info" type="button">Buy Now</button>
+<!--                        <button class="btn btn-info" type="button">Buy Now</button>-->
                     </g:if>
                     <g:else>
                         <small class="text-danger"><strong><em>Sorry this item is out of stock</em></strong></small>
