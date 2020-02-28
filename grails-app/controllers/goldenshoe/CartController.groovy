@@ -29,28 +29,46 @@ class CartController {
         println("params: "+productToAdd+", "+size+", "+quantity)
 
         if(productName != null && size != null && quantity != null){
-            def alreadyExists = false
+            def addToCart = false
 
             def newCartProduct = new CartProduct(
                     product: productToAdd,
                     size: size,
                     quantity: quantity
-            ).save(flush: true)
+            )
 
             println("CP: "+newCartProduct)
 
-            for(CartProduct cartProduct in cart){
-                if (cartProduct.product.productName == newCartProduct.product.productName){
-                    alreadyExists = true
-                    break
+            if (!cart.isEmpty()){
+                for(CartProduct cartProduct in cart){
+                    if (cartProduct.product.productName == newCartProduct.product.productName){
+                        if (cartProduct.size == newCartProduct.size){
+                            cartProduct.quantity = cartProduct.quantity + newCartProduct.quantity
+                            println("product:size(exists): FALSE")
+                            addToCart = false
+                            break
+                        } else{
+                            println("product(exists): TRUE")
+                            addToCart = true
+
+                        }
+                    } else {
+                        println("doesnt exist: TRUE")
+                        addToCart = true
+                    }
                 }
+            } else {
+                println("1st prod: TRUE")
+                addToCart = true
             }
 
-            if (!alreadyExists){
+
+            if (addToCart){
                 cart.add(newCartProduct)
+                newCartProduct.save(flush: true)
                 println(productToAdd.productName + " added to cart")
             } else {
-                println("item already exists in cart")
+                println("do not add to cart------------------------")
             }
 
             println("new cart: " + cart)
@@ -87,11 +105,13 @@ class CartController {
 
         println("orderNo: "+orderNumber)
 
-        for(CartProduct cartProduct in cart){
-//            totalPrice = totalPrice + cartProduct.product.price*cartProduct.quantity
+
+//        for(CartProduct cartProduct in cart){
+//            println("old stock: "+cartProduct.product.stock)
+//            cartProduct.product.stock = cartProduct.getProduct().getStock() - cartProduct.getQuantity()
+//            println("new stock: "+cartProduct.product.stock)
 //
-            cartProduct.product.stock = cartProduct.product.stock - cartProduct.quantity
-        }
+//        }
 
         println("params price: "+totalPrice)
         println("params wasVoucherApplied: "+wasVoucherApplied)
@@ -105,6 +125,15 @@ class CartController {
                 totalPrice: totalPrice,
                 status: "Dispatching"
         ).save(flush: true)
+
+
+        for(CartProduct cartProduct in cart){
+            Product product = Product.findByProductName(cartProduct.product.productName)
+            println("old stock: "+cartProduct.product.stock)
+            product.stock = product.stock - cartProduct.quantity
+            product.save(flush: true)
+            println("new stock: "+product.stock)
+        }
 
 
         render(view: "confirmation", model: [customerName: customerName, mobile: mobile, customerAddress: customerAddress,
