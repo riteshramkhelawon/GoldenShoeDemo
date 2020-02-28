@@ -9,7 +9,7 @@
     <script>
         function addToBasket(productName, size, quantity){
             if(size){
-                $('#addToBasketBtn').addClass('hidden');$('#basketMessage').removeClass('hidden');
+<!--                $('#addToBasketBtn').addClass('hidden');$('#basketMessage').removeClass('hidden');-->
                 $('#basketMessage').delay(2500).fadeOut('slow');
 
                 var URL="${createLink(controller:'cart', action:'addToCart')}";
@@ -61,14 +61,18 @@
                     <hr>
                     <div class="pl-0 row">
                         <div class="col-6">
-                            <h4>Available in sizes: </h4>
-                            <select required id="selectSize" class="btn btn-info">
-                                <option selected="selected" disabled>Select a size</option>
-                                <g:each var="size" in="${product.availableSizes}">
-                                    <option class="dropdown-item" value="${size}">${size}</option>
-                                </g:each>
-                            </select>
-                            <br><br>
+                            <g:if test="${product.stock > 0}">
+                                <h4>Available in sizes: </h4>
+                                <select required id="selectSize" class="btn btn-info">
+                                    <option selected="selected" disabled>Select a size</option>
+                                    <g:each var="size" in="${product.availableSizes}">
+                                        <option class="dropdown-item" value="${size}">${size}</option>
+                                    </g:each>
+                                </select>
+                                <br><br>
+                            </g:if>
+
+
                             <div>
                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
                                     Find your size
