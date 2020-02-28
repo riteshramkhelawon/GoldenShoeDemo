@@ -32,28 +32,23 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light mb-0">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-md navbar-light mb-0" style="background-color: firebrick; border-radius: 0px;">
+        <a class="navbar-brand" href="/">Golden Shoe</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse fixed-top" id="navbarTogglerDemo01" style="background-color: firebrick;">
-            <a class="navbar-brand" href="/">Golden Shoe</a>
-            <ul class="navbar-nav navbar-right mr-5">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-
-                <li class="nav-item">
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item text-sm-center">
                     <a class="nav-link text-light" href="/trackOrder">Track Order</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item text-sm-center">
                     <a class="nav-link text-light" href="#">About</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item text-sm-center">
                     <a class="nav-link text-light" href="/faqs" href="#">FAQs</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item text-sm-center">
                     <form action="/cart/checkout">
                         <button class="btn" type="submit"><i class="nav-link fas fa-shopping-cart fa-3x"></i></button>
                     </form>
