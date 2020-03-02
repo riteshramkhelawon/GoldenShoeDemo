@@ -7,23 +7,28 @@
     </head>
     <body>
     <script>
-        function addToBasket(productName, size, quantity){
-            if(size){
-<!--                $('#addToBasketBtn').addClass('hidden');$('#basketMessage').removeClass('hidden');-->
-                $('#basketMessage').delay(2500).fadeOut('slow');
+        function addToBasket(productName, size, quantity, stock){
+            if(quantity <= stock){
+                if(size){
+                    $('#basketMessage').removeClass('hidden');
+                    $('#basketMessage').delay(2500).fadeOut('slow');
 
-                var URL="${createLink(controller:'cart', action:'addToCart')}";
-                console.log("ajax call JS");
-                $.ajax({
-                       url: URL,
-                       data: {item: productName, size: size, quantity: quantity},
-                       success: function(resp){
-                       console.log("ajax call done");
-                   }
-                });
+                    var URL="${createLink(controller:'cart', action:'addToCart')}";
+                    console.log("ajax call JS");
+                    $.ajax({
+                           url: URL,
+                           data: {item: productName, size: size, quantity: quantity},
+                           success: function(resp){
+                           console.log("ajax call done");
+                       }
+                    });
+                } else {
+                    alert('Please select a size before adding to the basket');
+                }
             } else {
-                alert('Please select a size before adding to the basket');
+                alert('There is not enough stock for this quantity');
             }
+
         }
 
         function findSize(mostUsedBrand, footShape, usualSize){
@@ -100,8 +105,7 @@
                     <g:if test="${product.stock > 0}">
                         <small class="text-success"><strong><em>In stock: ${product.stock}</em></strong></small>
                         <br><br>
-                        <button id="addToBasketBtn" class="btn btn-info" type="button" onclick="addToBasket('${product.productName}', $('#chosenSize').val(), $('#quantity').val())">Add to Basket</button>
-<!--                        <button class="btn btn-info" type="button">Buy Now</button>-->
+                        <button id="addToBasketBtn" class="btn btn-info" type="button" onclick="addToBasket('${product.productName}', $('#chosenSize').val(), $('#quantity').val(), ${product.stock})">Add to Basket</button>
                     </g:if>
                     <g:else>
                         <small class="text-danger"><strong><em>Sorry this item is out of stock</em></strong></small>
