@@ -3,31 +3,9 @@
 <head>
     <title>Track Your Order</title>
     <meta name="layout" content="main">
+    <script src="/assets/trackOrder.js"></script>
 </head>
 <body>
-    <script>
-        function trackOrder(orderNumber){
-            var URL="${createLink(controller:'customerOrder', action:'trackOrder')}";
-            console.log("ajax call - track");
-            $.ajax({
-                   url: URL,
-                   data: {orderNumber: orderNumber},
-                   success: function(resp){
-                        console.log("ajax track done");
-
-                        if(resp.valid){
-                            $('#orderStatus').removeClass('hidden')
-                            $('#orderStatus').html("Your order is currently: "+resp.status)
-                            $('#orderStatus').css('color', 'green');
-                        } else {
-                            $('#orderStatus').removeClass('hidden')
-                            $('#orderStatus').html("Sorry this order number was not found")
-                            $('#orderStatus').css('color', 'red');
-                        }
-               }
-            });
-        }
-    </script>
 
     <div class="text-center container">
         <div class="container">
@@ -40,7 +18,6 @@
             <br><br>
             <h3 class="hidden" id="orderStatus"></h3>
         </div>
-
     </div>
 </body>
 </html>

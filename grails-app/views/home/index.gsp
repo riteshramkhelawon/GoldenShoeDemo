@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
+    <link rel="stylesheet" type="text/css" href="/assets/home.css">
     <title>Golden Shoe</title>
 </head>
 <body>
@@ -101,18 +102,5 @@
             </div>
         </div>
     </section>
-
-
-    <style>
-        .card {
-            border-left: 1px solid rgba(0, 0, 0, 0.125);
-        }
-
-        .thumbnail img {
-            height:250px;
-            width:100%;
-        }
-
-    </style>
 </body>
 </html>

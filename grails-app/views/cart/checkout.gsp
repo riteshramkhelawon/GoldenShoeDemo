@@ -3,36 +3,10 @@
 <head>
     <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'product.label', default: 'Product')}" />
+    <script src="/assets/checkout.js"></script>
     <title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
 <body>
-    <script>
-         function applyVoucherCode(voucherCode, totalPrice){
-                var URL="${createLink(controller:'cart', action:'calculateDiscountedTotal')}";
-                console.log("ajax call - voucher");
-                $.ajax({
-                       url: URL,
-                       data: {voucherCode: voucherCode, totalPrice: totalPrice},
-                       success: function(resp){
-                            console.log("voucher code applied: " + resp.valid +", "+resp.discountedTotal);
-                            if(resp.valid == true){
-                                $('#validVoucherCode').removeClass('hidden');
-                                $('#invalidVoucherCode').addClass('hidden');
-                                $('#discountedTotalTableRow').removeClass('hidden');
-                                $('#discountedTotal').html(resp.discountedTotal.toFixed(2));
-                                $('#discountedTotalHidden').val(resp.discountedTotal.toFixed(2));
-                                $('#applyCodeBtn').prop('disabled', true);
-                                $('#wasVoucherApplied').val(true);
-                            } else {
-                                $('#invalidVoucherCode').removeClass('hidden');
-                                $('#validVoucherCode').addClass('hidden');
-                                $('#discountedTotalHidden').val(resp.discountedTotal.toFixed(2));
-                            }
-                   }
-                });
-            }
-    </script>
-
     <section id="cartContents" class="container">
         <h1>Your Basket</h1>
         <hr>
@@ -103,7 +77,7 @@
             <hr>
 
             <section id="userDetails" class="container">
-                <form action="/cart/completeOrder">
+                <form action="/customerOrder/completeOrder">
                     <div class="row">
                         <div class="col-md-6">
                             <h2 class="text-secondary">Your Details</h2>
