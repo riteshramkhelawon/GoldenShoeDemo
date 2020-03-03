@@ -43,16 +43,12 @@
                     <a class="nav-link text-light" href="/trackOrder">Track Order</a>
                 </li>
                 <li class="nav-item text-sm-center">
-                    <a class="nav-link text-light" href="#">About</a>
-                </li>
-                <li class="nav-item text-sm-center">
                     <a class="nav-link text-light" href="/faqs" href="#">FAQs</a>
                 </li>
                 <li class="nav-item text-sm-center">
                     <form action="/cart/checkout">
                         <button class="btn" type="submit"><i class="nav-link fas fa-shopping-cart fa-3x"></i></button>
                     </form>
-
                 </li>
             </ul>
         </div>
