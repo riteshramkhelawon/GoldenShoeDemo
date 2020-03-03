@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="layout" content="main" />
-    <title>Order Confirmation</title>
+    <title>Golden Shoe | Order Confirmation</title>
 </head>
     <section id="orderNo" class="container">
         <div class="text-center text-secondary">

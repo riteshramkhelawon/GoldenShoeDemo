@@ -3,7 +3,7 @@
 <head>
     <meta name="layout" content="main"/>
     <link rel="stylesheet" type="text/css" href="/assets/home.css">
-    <title>Golden Shoe</title>
+    <title>Golden Shoe | Home</title>
 </head>
 <body>
     <section id="mainImagesSlider" class="text-center">

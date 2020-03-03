@@ -4,7 +4,7 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'product.label', default: 'Product')}" />
         <link rel="stylesheet" type="text/css" href="/assets/product.css">
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <title>Golden Shoe | ${product.productName}</title>
         <script src="/assets/product.js"></script>
     </head>
     <body>

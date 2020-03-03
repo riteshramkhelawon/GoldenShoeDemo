@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Track Your Order</title>
+    <title>Golden Shoe | Track Order</title>
     <meta name="layout" content="main">
     <script src="/assets/trackOrder.js"></script>
 </head>

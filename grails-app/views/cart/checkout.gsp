@@ -4,7 +4,7 @@
     <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'product.label', default: 'Product')}" />
     <script src="/assets/checkout.js"></script>
-    <title><g:message code="default.list.label" args="[entityName]" /></title>
+    <title>Golden Shoe | Checkout</title>
 </head>
 <body>
     <section id="cartContents" class="container">

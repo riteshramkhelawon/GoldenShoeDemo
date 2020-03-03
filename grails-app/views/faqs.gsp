@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>FAQs</title>
+    <title>Golden Shoe | Ask Us</title>
     <meta name="layout" content="main">
     <script src="/assets/faqs.js"></script>
 </head>
