@@ -133,3 +133,7 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+
+witAi:
+    baseUrl: "https://api.wit.ai/message?v=20200227&q="
+    accessToken: "U46SWUWU2SXC6SEXE7545N3272F7QWWS"

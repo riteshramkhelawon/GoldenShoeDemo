@@ -7,7 +7,7 @@
 <body>
 <script>
         function faqReply(userQuestion){
-            var URL="${createLink(controller:'home', action:'faqReply')}";
+            var URL="${createLink(controller:'faq', action:'faqReply')}";
             console.log("ajax call - faq");
             $.ajax({
                    url: URL,
